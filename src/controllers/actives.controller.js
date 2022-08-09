@@ -1,15 +1,22 @@
-const productModel = require('../model/product')
+import activesModel from '../models/actives.model.js'
+import Debug from 'debug'
+const debug = Debug('treval-backend:server')
 
 async function list (req, res, next) {
-  const items = productModel.list()
+  try {
+    const items = activesModel.list()
+    console.log(items)
     const data = items.map(item => {
       return {
         id: item.id,
-        name: item.name,
-        imageId: item.imageId,
+        title: item.title
       }
     })
-    res.json(data);
+    res.json(items)
+  } catch (error) {
+    debug(error)
+    next(error)
+  }
 }
 
 // async function getItem (req, res, next) {
@@ -25,7 +32,4 @@ async function list (req, res, next) {
 //   })
 // }
 
-module.exports = {
-  list,
-  // getItem
-};
+export default { list }

@@ -4,9 +4,11 @@
  * Module dependencies.
  */
 
-var app = require('../app');
-var debug = require('debug')('shopping-backend:server');
-var http = require('http');
+import app from '../src/app.js'
+import http from 'http' 
+import Debug from 'debug'
+const debug = Debug('treval-backend:server')
+// var debug = require('debug')('treval-backend:server');
 
 /**
  * Get port from environment and store in Express.
