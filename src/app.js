@@ -1,15 +1,13 @@
 import createError from 'http-errors'
 import express from 'express'
 import path from 'path'
-import DB from './db.js'
+import db from './db.js'
 import routes from './routes/index.js'
 import activesRoutes from './routes/actives.route.js'
 
 const __dirname = path.resolve();
 const app = express();
 const port = 3000
-
-DB.init()
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

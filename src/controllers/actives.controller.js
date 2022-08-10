@@ -4,14 +4,8 @@ const debug = Debug('treval-backend:server')
 
 async function list (req, res, next) {
   try {
-    const items = activesModel.list()
+    const items = await activesModel.list()
     console.log(items)
-    const data = items.map(item => {
-      return {
-        id: item.id,
-        title: item.title
-      }
-    })
     res.json(items)
   } catch (error) {
     debug(error)

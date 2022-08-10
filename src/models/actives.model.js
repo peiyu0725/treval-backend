@@ -1,9 +1,8 @@
-import DB from '../db.js'
-const db = DB.db
-console.log(DB)
-function list() {
-    const sql ="SELECT * FROM actives"
-    const res = db.prepare(sql).all()
+import sqlite from '../db.js'
+
+async function list () {
+    const sql = "SELECT * FROM actives"
+    const res = await sqlite.prepare(sql).all()
     return res
 }
 
@@ -13,7 +12,7 @@ function get(value, key = 'id') {
     const param = {
         value
     }
-    const res = db.prepare(sql).get(param)
+    const res = sqlite.prepare(sql).get(param)
     return res
 }
 
@@ -25,7 +24,7 @@ function add(data) {
         VALUES($title, $tags, $image, $location, $time, $ticket, $phone
         , $address, $url, $content, $traffic, $precautions);
         select last_insert_rowid();`
-    const res = db.prepare(sql).run(data)
+    const res = sqlite.prepare(sql).run(data)
     return res
 
 }
@@ -37,14 +36,14 @@ function update(data) {
         , ticket = $ticket , phone = $phone , address = $address, url = $url
         , content = $content, traffic = $traffic, precautions = $precautions
         WHERE id = $id`
-    const res = db.prepare(sql).run(data)
+    const res = sqlite.prepare(sql).run(data)
     return res
 
 }
 
 function remove(id, cb) {
     if (!id) return cd(new Error('缺少參數id'))
-    const res = db.run("DELETE FROM actives WHERE id = ?", id)
+    const res = sqlite.run("DELETE FROM actives WHERE id = ?", id)
     return res
 
 }
