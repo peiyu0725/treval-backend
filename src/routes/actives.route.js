@@ -4,6 +4,8 @@ var router = Router();
 
 router.route('/')
     .get(actives.list)
-//.get('/:id', product.getItem)
+
+router.route('/:id')
+    .get(actives.getItem)
 
 export default router

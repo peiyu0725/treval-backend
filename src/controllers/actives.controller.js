@@ -4,8 +4,11 @@ const debug = Debug('treval-backend:server')
 
 async function list (req, res, next) {
   try {
-    const items = await activesModel.list()
-    console.log(items)
+    let items = await activesModel.list()
+    items = items.map(item=> {
+      item.tags = item.tags.split(',')
+      return item
+    })
     res.json(items)
   } catch (error) {
     debug(error)
@@ -13,17 +16,17 @@ async function list (req, res, next) {
   }
 }
 
-// async function getItem (req, res, next) {
-//   const id = req.params.id
-//   menuCollection.find({ id: Number(id) }).limit(1).toArray(function (err, items) {
-//     if (err) throw err;
-//     if (items.length === 0) res.json({})
-//     res.json({
-//       id: items[0].id,
-//       name: items[0].name,
-//       imageId: items[0].imageId,
-//     });
-//   })
-// }
+async function getItem (req, res, next) {
+  try {
+    const id = req.params.id
+    let item = await activesModel.get(Number(id))
+    if(!item) res.json(null)
+    item.tags = item.tags.split(',')
+    res.json(item)
+  } catch (error) {
+    debug(error)
+    next(error)
+  }
+}
 
-export default { list }
+export default { list, getItem }

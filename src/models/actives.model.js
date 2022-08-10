@@ -1,8 +1,8 @@
 import sqlite from '../db.js'
 
-async function list () {
+function list () {
     const sql = "SELECT * FROM actives"
-    const res = await sqlite.prepare(sql).all()
+    const res = sqlite.prepare(sql).all()
     return res
 }
 

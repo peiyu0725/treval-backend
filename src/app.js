@@ -1,5 +1,6 @@
 import createError from 'http-errors'
 import express from 'express'
+import cors from 'cors'
 import path from 'path'
 import db from './db.js'
 import routes from './routes/index.js'
@@ -17,6 +18,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors({
+  origin: '*'
+}))
 app.use('/', routes);
 app.use('/api/actives', activesRoutes);
 
