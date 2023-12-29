@@ -5,6 +5,7 @@ import path from 'path'
 import db from './db.js'
 import routes from './routes/index.js'
 import activesRoutes from './routes/actives.route.js'
+import noteRoutes from './routes/note.route.js'
 
 const __dirname = path.resolve();
 const app = express();
@@ -23,6 +24,7 @@ app.use(cors({
 }))
 app.use('/', routes);
 app.use('/api/actives', activesRoutes);
+app.use('/api/note', noteRoutes);
 
 
 // catch 404 and forward to error handler

@@ -17,16 +17,15 @@ function get(value, key = 'id') {
 }
 
 function add(data) {
+    console.log(data)
     const sql = `
         INSERT INTO
         actives(title, tags, image, location, time, ticket, phone
         , address, url, content, traffic, precautions)
         VALUES($title, $tags, $image, $location, $time, $ticket, $phone
-        , $address, $url, $content, $traffic, $precautions);
-        select last_insert_rowid();`
+        , $address, $url, $content, $traffic, $precautions)`
     const res = sqlite.prepare(sql).run(data)
     return res
-
 }
 
 function update(data) {
